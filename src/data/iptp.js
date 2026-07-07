@@ -1,0 +1,42 @@
+export const iptpText = [
+  {
+    title: "정보처리기사 실기 핵심 요약 특강1 - 데이터 입출력 구현",
+    img: "https://i.ytimg.com/vi/pj2pE5P81Ac/hq720.jpg",
+    author: "자격증 교육 1위 해커스",
+    videoId: "pj2pE5P81Ac",
+    date: "2024.06.03",
+    channelId: "UC4REETmYtlvqHunx2tl2Pmg",
+  },
+  {
+    title: "정보처리기사 실기 핵심 요약 특강2 - 프로그래밍 C언어",
+    img: "https://i.ytimg.com/vi/W3pKtVXOswI/hq720.jpg",
+    author: "자격증 교육 1위 해커스",
+    videoId: "W3pKtVXOswI",
+    date: "2024.06.03",
+    channelId: "UC4REETmYtlvqHunx2tl2Pmg",
+  },
+  {
+    title: "정보처리기사 실기 핵심 요약 특강3 - 프로그래밍 JAVA",
+    img: "https://i.ytimg.com/vi/q-YndmyB8rY/hq720.jpg",
+    author: "자격증 교육 1위 해커스",
+    videoId: "q-YndmyB8rY",
+    date: "2024.06.04",
+    channelId: "UC4REETmYtlvqHunx2tl2Pmg",
+  },
+  {
+    title: "정보처리기사 실기 핵심 요약4 - SQL응용",
+    img: "https://i.ytimg.com/vi/v5UigZ_XDjI/hq720.jpg",
+    author: "자격증 교육 1위 해커스",
+    videoId: "v5UigZ_XDjI",
+    date: "2024.06.04",
+    channelId: "UC4REETmYtlvqHunx2tl2Pmg",
+  },
+  {
+    title: "정보처리기사 실기 핵심 요약 특강5 - 기출문제 8시간 총정리",
+    img: "https://i.ytimg.com/vi/UfZ7lM91jMA/hq720.jpg",
+    author: "자격증 교육 1위 해커스",
+    videoId: "UfZ7lM91jMA",
+    date: "2024.09.19",
+    channelId: "UC4REETmYtlvqHunx2tl2Pmg",
+  },
+];
