@@ -13,7 +13,6 @@ const VideoSearchSkeleton = ({ count = 8 }) => {
           <div className="video__info">
             <div className="title">
               <SkeletonBlock className="skeleton__line skeleton__line--title" />
-              <SkeletonBlock className="skeleton__line skeleton__line--medium" />
             </div>
             <div className="info">
               <span className="author">

@@ -80,12 +80,26 @@
 
   .video__info {
     .title {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+
+      .skeleton__line {
+        height: 14px;
+        margin-bottom: 6px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
 
     .author {
       display: block;
       width: 60%;
+
+      .skeleton__line {
+        height: 14px;
+        margin-bottom: 0;
+      }
     }
   }
 }
