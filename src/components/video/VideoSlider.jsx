@@ -1,67 +1,58 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import OptimizedImage from '../common/OptimizedImage'
+import React from "react";
+import { Link } from "react-router-dom";
+import OptimizedImage from "../common/OptimizedImage";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
-import { Navigation } from 'swiper/modules';
+import { Navigation } from "swiper/modules";
 
-const VideoSlider = ({id, title, videos}) => {
-    return (
-        <section id={id}>
-            <h2>{title}</h2>
-            <div className="video__slider">
-                <Swiper 
-                    slidesPerView={1}
-                    spaceBetween={20}
-                    navigation={true} 
-                    modules={[Navigation]} 
-                    className={`mySwiper-${id}`}
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 20
+const VideoSlider = ({ id, title, videos }) => {
+  return (
+    <section id={id}>
+      <h2>{title}</h2>
+      <div className="video__slider">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={20}
+          navigation={true}
+          modules={[Navigation]}
+          className={`mySwiper-${id}`}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            1600: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {videos.map((video, key) => (
+            <SwiperSlide key={key}>
+              <div className="video">
+                <div className="video__thumb play__icon">
+                  <Link to={`/video/${video.videoId}`}>
+                    <OptimizedImage src={video.img} alt={video.title} width="480" height="270" />
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
+  );
+};
 
-                        },
-                        768: {
-                            slidesPerView: 3,
-                            spaceBetween: 20
-
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 20
-
-                        },
-                        1600: {
-                            slidesPerView: 5,
-                            spaceBetween: 20
-
-                        }
-                    }}
-                >
-                    {videos.map((video, key) => (
-                        <SwiperSlide key={key}>
-                        <div className="video">
-                            <div className="video__thumb play__icon">
-                                <Link to={`/video/${video.videoId}`}>
-                                    <OptimizedImage
-                                        src={video.img}
-                                        alt={video.title}
-                                        width="480"
-                                        height="270"
-                                    />
-                                </Link>
-                            </div>
-                        </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>
-        </section>
-    )
-}
-
-export default VideoSlider
+export default VideoSlider;

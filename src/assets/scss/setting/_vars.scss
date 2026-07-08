@@ -25,7 +25,9 @@
   --brand: #22d3ee;
 
   // 폰트 세팅
-  font-family: var(--mainfont-nanum), "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", helvetica, sans-serif;
+  font-family:
+    var(--mainfont-nanum), "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", helvetica,
+    sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;

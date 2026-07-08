@@ -7,11 +7,7 @@ const Menu = () => {
   const location = useLocation();
 
   return (
-    <nav
-      id="primary-navigation"
-      className="header__menu"
-      aria-label="주요 메뉴"
-    >
+    <nav id="primary-navigation" className="header__menu" aria-label="주요 메뉴">
       <ul className="menu">
         {headerMenus.map((menu, key) => {
           const isActive = location.pathname === menu.src;
@@ -35,10 +31,7 @@ const Menu = () => {
 
           return (
             <li key={key} className={isActive ? "active" : ""}>
-              <Link
-                to={keyword.src}
-                aria-current={isActive ? "page" : undefined}
-              >
+              <Link to={keyword.src} aria-current={isActive ? "page" : undefined}>
                 {keyword.title}
               </Link>
             </li>

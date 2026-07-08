@@ -1,110 +1,111 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Link, useParams } from 'react-router-dom';
-import { fetchFromAPI } from '../utils/api'
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link, useParams } from "react-router-dom";
+import { fetchFromAPI } from "../utils/api";
 
-import Main from '../components/section/Main';
-import VideoDetailSkeleton from '../components/skeleton/VideoDetailSkeleton';
-import ErrorMessage from '../components/common/ErrorMessage';
+import Main from "../components/section/Main";
+import VideoDetailSkeleton from "../components/skeleton/VideoDetailSkeleton";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 import { CiChat1 } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { CiRead } from "react-icons/ci";
 
 const formatVideoTitle = (title) => {
-    const [mainTitle, ...subTitles] = title.split(' | ');
+  const [mainTitle, ...subTitles] = title.split(" | ");
 
-    if (!subTitles.length) {
-        return title;
-    }
+  if (!subTitles.length) {
+    return title;
+  }
 
-    return (
-        <>
-            <span className='video__titleMain'>{mainTitle}</span>
-            <span className='video__titleSeparator'> | </span>
-            <span className='video__titleSub'>{subTitles.join(' | ')}</span>
-        </>
-    );
+  return (
+    <>
+      <span className="video__titleMain">{mainTitle}</span>
+      <span className="video__titleSeparator"> | </span>
+      <span className="video__titleSub">{subTitles.join(" | ")}</span>
+    </>
+  );
 };
 
 const Video = () => {
-    const { videoId } = useParams();
+  const { videoId } = useParams();
 
-    const {
-        data: videoDetail,
-        error,
-        isError,
-        isLoading,
-        refetch,
-    } = useQuery({
-        queryKey: ['videoDetail', videoId],
-        queryFn: async ({ signal }) => {
-            const data = await fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`, { signal });
-            return data?.items?.[0] || null;
-        },
-        enabled: Boolean(videoId),
-    });
+  const {
+    data: videoDetail,
+    error,
+    isError,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["videoDetail", videoId],
+    queryFn: async ({ signal }) => {
+      const data = await fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`, { signal });
+      return data?.items?.[0] || null;
+    },
+    enabled: Boolean(videoId),
+  });
 
-    return (
-        <Main 
-            title = {videoDetail?.snippet?.title || "유튜브 비디오 영상"}
-            description={videoDetail?.snippet?.description || "유튜브 비디오 영상을 볼 수 있습니다."}>
-            
-            <section id='videoViewPage'>
-                {isLoading ? (
-                    <VideoDetailSkeleton />
-                ) : isError ? (
-                    <ErrorMessage error={error} onRetry={() => refetch()} />
-                ) : !videoDetail ? (
-                    <ErrorMessage
-                        title="영상 정보를 찾을 수 없습니다"
-                        message="요청한 영상 정보가 없거나 일시적으로 불러올 수 없습니다."
-                        onRetry={() => refetch()}
-                    />
-                ) : (
-                    <div className='video__view'>
-                        <div className='video__play'>
-                            <iframe
-                                src={`https://www.youtube.com/embed/${videoId}?controls=1&rel=0&playsinline=1`}
-                                title={`${videoDetail.snippet.title} 영상 플레이어`}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                            />
-                        </div>
-                        <div className='video__info'>
-                            <h2 className='video__title'>
-                                {formatVideoTitle(videoDetail.snippet.title)}
-                            </h2>
-                            <div className='video__channel'>
-                                <div className='id'>
-                                    <Link to={`/channel/${videoDetail.snippet.channelId}`}>{videoDetail.snippet.channelTitle}</Link>
-                                </div>
-                                <div className='count'>
-                                    <span className='view' aria-label={`조회수 ${videoDetail.statistics.viewCount}`}>
-                                        <CiRead aria-hidden="true" focusable="false" />
-                                        {videoDetail.statistics.viewCount}
-                                    </span>
-                                    <span className='like' aria-label={`좋아요 ${videoDetail.statistics.likeCount}`}>
-                                        <CiStar aria-hidden="true" focusable="false" />
-                                        {videoDetail.statistics.likeCount}
-                                    </span>
-                                    <span className='comment' aria-label={`댓글 ${videoDetail.statistics.commentCount}`}>
-                                        <CiChat1 aria-hidden="true" focusable="false" />
-                                        {videoDetail.statistics.commentCount}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className='video__desc'>
-                                {videoDetail.snippet.description}
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </section>
-        </Main>
-    )
-}
+  return (
+    <Main
+      title={videoDetail?.snippet?.title || "유튜브 비디오 영상"}
+      description={videoDetail?.snippet?.description || "유튜브 비디오 영상을 볼 수 있습니다."}
+    >
+      <section id="videoViewPage">
+        {isLoading ? (
+          <VideoDetailSkeleton />
+        ) : isError ? (
+          <ErrorMessage error={error} onRetry={() => refetch()} />
+        ) : !videoDetail ? (
+          <ErrorMessage
+            title="영상 정보를 찾을 수 없습니다"
+            message="요청한 영상 정보가 없거나 일시적으로 불러올 수 없습니다."
+            onRetry={() => refetch()}
+          />
+        ) : (
+          <div className="video__view">
+            <div className="video__play">
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}?controls=1&rel=0&playsinline=1`}
+                title={`${videoDetail.snippet.title} 영상 플레이어`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+            <div className="video__info">
+              <h2 className="video__title">{formatVideoTitle(videoDetail.snippet.title)}</h2>
+              <div className="video__channel">
+                <div className="id">
+                  <Link to={`/channel/${videoDetail.snippet.channelId}`}>
+                    {videoDetail.snippet.channelTitle}
+                  </Link>
+                </div>
+                <div className="count">
+                  <span className="view" aria-label={`조회수 ${videoDetail.statistics.viewCount}`}>
+                    <CiRead aria-hidden="true" focusable="false" />
+                    {videoDetail.statistics.viewCount}
+                  </span>
+                  <span className="like" aria-label={`좋아요 ${videoDetail.statistics.likeCount}`}>
+                    <CiStar aria-hidden="true" focusable="false" />
+                    {videoDetail.statistics.likeCount}
+                  </span>
+                  <span
+                    className="comment"
+                    aria-label={`댓글 ${videoDetail.statistics.commentCount}`}
+                  >
+                    <CiChat1 aria-hidden="true" focusable="false" />
+                    {videoDetail.statistics.commentCount}
+                  </span>
+                </div>
+              </div>
+              <div className="video__desc">{videoDetail.snippet.description}</div>
+            </div>
+          </div>
+        )}
+      </section>
+    </Main>
+  );
+};
 
-export default Video
+export default Video;

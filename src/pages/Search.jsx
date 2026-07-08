@@ -26,10 +26,7 @@ const Search = () => {
       const query = encodeURIComponent(searchId);
       const pageToken = pageParam ? `&pageToken=${pageParam}` : "";
 
-      return fetchFromAPI(
-        `search?part=snippet&type=video&q=${query}${pageToken}`,
-        { signal },
-      );
+      return fetchFromAPI(`search?part=snippet&type=video&q=${query}${pageToken}`, { signal });
     },
     enabled: Boolean(searchId),
     initialPageParam: "",
@@ -63,9 +60,7 @@ const Search = () => {
               disabled={isFetchingNextPage}
               aria-busy={isFetchingNextPage}
               aria-label={
-                isFetchingNextPage
-                  ? "검색 결과를 추가로 불러오는 중"
-                  : "검색 결과 더보기"
+                isFetchingNextPage ? "검색 결과를 추가로 불러오는 중" : "검색 결과 더보기"
               }
             >
               {isFetchingNextPage ? "불러오는 중..." : "더보기"}

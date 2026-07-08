@@ -26,11 +26,8 @@ const getPageTitle = (title) => {
 };
 
 const getPageDescription = (description) => {
-  const defaultDescription =
-    "개발자와 자격증 학습자를 위한 영상 큐레이션 플랫폼입니다.";
-  const normalizedDescription = (description || defaultDescription)
-    .replace(/\s+/g, " ")
-    .trim();
+  const defaultDescription = "개발자와 자격증 학습자를 위한 영상 큐레이션 플랫폼입니다.";
+  const normalizedDescription = (description || defaultDescription).replace(/\s+/g, " ").trim();
 
   return normalizedDescription.length > 160
     ? `${normalizedDescription.slice(0, 157)}...`
@@ -45,19 +42,9 @@ const Main = (props) => {
     document.title = title;
     setMetaContent('meta[name="description"]', "name", "description", description);
     setMetaContent('meta[property="og:title"]', "property", "og:title", title);
-    setMetaContent(
-      'meta[property="og:description"]',
-      "property",
-      "og:description",
-      description
-    );
+    setMetaContent('meta[property="og:description"]', "property", "og:description", description);
     setMetaContent('meta[name="twitter:title"]', "name", "twitter:title", title);
-    setMetaContent(
-      'meta[name="twitter:description"]',
-      "name",
-      "twitter:description",
-      description
-    );
+    setMetaContent('meta[name="twitter:description"]', "name", "twitter:description", description);
   }, [props.title, props.description]);
 
   return (
