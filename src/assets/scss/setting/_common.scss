@@ -3,6 +3,23 @@ body {
   color: var(--white);
 }
 
+.optimized-image {
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+
+  &.is-loaded {
+    opacity: 1;
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .optimized-image {
+    transition: none;
+  }
+}
+
 // 섹션 공통 요소
 section {
   padding: 20px 40px;
