@@ -66,9 +66,7 @@ const Developer = ({ videos, title, id }) => {
                   </Link>
                 </div>
                 <div className="developer__info">
-                  <Link to={`/channel/${developer.channelId}`}>
-                    {developer.name}
-                  </Link>
+                  <Link to={`/channel/${developer.channelId}`}>{developer.name}</Link>
                 </div>
               </div>
             </SwiperSlide>
