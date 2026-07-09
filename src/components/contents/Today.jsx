@@ -16,6 +16,7 @@ const Today = ({ videos, id }) => {
               height="270"
               loading="eager"
               fetchPriority="high"
+              fadeIn={false}
             />
           </Link>
         </div>

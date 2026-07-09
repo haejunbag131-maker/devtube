@@ -12,6 +12,7 @@ const OptimizedImage = ({
   decoding = "async",
   fetchPriority,
   fallbackSrc = FALLBACK_IMAGE,
+  fadeIn = true,
   className = "",
   onLoad,
   onError,
@@ -20,13 +21,19 @@ const OptimizedImage = ({
   const priorityProps = fetchPriority ? { fetchpriority: fetchPriority } : {};
 
   const handleLoad = (event) => {
-    event.currentTarget.classList.add("is-loaded");
+    if (fadeIn) {
+      event.currentTarget.classList.add("is-loaded");
+    }
+
     onLoad?.(event);
   };
 
   const handleError = (event) => {
     if (event.currentTarget.src !== fallbackSrc) {
-      event.currentTarget.classList.remove("is-loaded");
+      if (fadeIn) {
+        event.currentTarget.classList.remove("is-loaded");
+      }
+
       event.currentTarget.src = fallbackSrc;
     }
 
@@ -42,7 +49,7 @@ const OptimizedImage = ({
       height={height}
       loading={loading}
       decoding={decoding}
-      className={`optimized-image ${className}`.trim()}
+      className={`optimized-image ${fadeIn ? "" : "is-loaded"} ${className}`.trim()}
       onLoad={handleLoad}
       onError={handleError}
       {...priorityProps}
