@@ -88,6 +88,8 @@ API 응답 전 빈 화면이 노출되면 사용자는 서비스가 멈췄다고
 - 목록·슬라이더·하단 이미지는 lazy loading 적용
 - `decoding="async"`와 `width`, `height` 적용으로 이미지 디코딩 및 레이아웃 밀림 개선
 - 검색 결과 썸네일을 `background-image`에서 실제 `img` 태그로 변경
+- 홈 하단 영상 슬라이더를 화면 근처에 진입할 때만 마운트하도록 지연 렌더링
+- 홈 슬라이더 YouTube 썸네일을 `hq720`에서 `mqdefault`로 변환해 이미지 전송량 감소
 - 깨진 이미지에 대한 fallback 처리 추가
 
 ### 접근성과 SEO 개선
@@ -101,6 +103,32 @@ API 응답 전 빈 화면이 노출되면 사용자는 서비스가 멈췄다고
 - 조회수, 좋아요, 댓글 등 통계 정보에 스크린리더용 label 추가
 - 페이지별 `title`, `description`, Open Graph, Twitter meta 갱신
 - 404 페이지를 실제 안내 페이지로 개선
+
+## 성능 측정
+
+배포 환경에서 Lighthouse를 실행해 성능과 접근성 지표를 확인했습니다.
+
+| 항목           | 점수 |
+| -------------- | ---: |
+| Performance    |   64 |
+| Accessibility  |   95 |
+| Best Practices |  100 |
+| SEO            |  100 |
+
+| 지표        | 결과  |
+| ----------- | ----- |
+| FCP         | 1.7s  |
+| LCP         | 9.9s  |
+| TBT         | 150ms |
+| CLS         | 0.097 |
+| Speed Index | 6.2s  |
+
+- 측정 환경: Lighthouse CLI / Mobile 기준 / 배포 URL `https://devtube-fe.vercel.app/`
+- 측정일: 2026.07.09
+
+측정 결과 접근성, Best Practices, SEO는 안정적인 수준으로 확인했습니다.
+
+반면 Performance는 LCP가 높게 측정되어, 첫 화면에서 가장 큰 콘텐츠가 표시되는 시간을 줄이는 작업이 후속 개선 대상으로 남아 있습니다.
 
 ## 트러블슈팅
 

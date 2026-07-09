@@ -8,6 +8,22 @@ import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
 
+const getCompactYoutubeThumbnail = (thumbnail) => {
+  try {
+    const url = new URL(thumbnail);
+
+    if (!url.hostname.includes("i.ytimg.com")) {
+      return thumbnail;
+    }
+
+    const videoId = url.pathname.match(/\/vi\/([^/]+)\//)?.[1];
+
+    return videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : thumbnail;
+  } catch {
+    return thumbnail;
+  }
+};
+
 const VideoSlider = ({ id, title, videos }) => {
   return (
     <section id={id}>
@@ -43,7 +59,12 @@ const VideoSlider = ({ id, title, videos }) => {
               <div className="video">
                 <div className="video__thumb play__icon">
                   <Link to={`/video/${video.videoId}`}>
-                    <OptimizedImage src={video.img} alt={video.title} width="480" height="270" />
+                    <OptimizedImage
+                      src={getCompactYoutubeThumbnail(video.img)}
+                      alt={video.title}
+                      width="320"
+                      height="180"
+                    />
                   </Link>
                 </div>
               </div>
